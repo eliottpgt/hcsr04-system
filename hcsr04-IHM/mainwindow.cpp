@@ -22,6 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Progress Bar
     progressBar = new QProgressBar(this);
     progressBar->setRange(1, 150);
+    progressBar->setEnabled(false);
+
+    // Check Box
+    checkStats = new QCheckBox("Stats Mesure",this);
+    checkStats->setEnabled(false);
+    checkStats->setCheckState(Qt::Unchecked);
 
     // Display
     distanceLabel = new QLabel("Disconnected", this);
@@ -30,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainLayout->addLayout(ipLayout);
     mainLayout->addWidget(btnFetch);
+    mainLayout->addWidget(checkStats);
     mainLayout->addWidget(distanceLabel);
     mainLayout->addWidget(progressBar);
 
@@ -67,6 +74,8 @@ void MainWindow::onConnected() {
     btnConnect->setText("Disconnect");
     btnConnect->setEnabled(true);
     btnFetch->setEnabled(true);
+    checkStats->setEnabled(true);
+    progressBar->setEnabled(true);
     distanceLabel->setText("Connected");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2980b9;");
 }
@@ -76,6 +85,8 @@ void MainWindow::onDisconnected() {
     btnConnect->setText("Connect");
     btnConnect->setEnabled(true);
     btnFetch->setEnabled(false);
+    checkStats->setEnabled(false);
+    progressBar->setEnabled(false);
     btnFetch->setText("Start Measure");
     distanceLabel->setText("Disconnected");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #7f8c8d;");

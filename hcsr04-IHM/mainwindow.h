@@ -11,6 +11,7 @@
 #include <QTcpSocket>
 #include <QTimer>
 #include <QProgressBar>
+#include <QCheckBox>
 
 class MainWindow : public QMainWindow
 {
@@ -37,4 +38,5 @@ private:
     QTcpSocket *socket;
     QTimer *timer;
     QProgressBar *progressBar;
+    QCheckBox *checkStats;
 };
