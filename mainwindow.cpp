@@ -34,10 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
     distanceLabel->setAlignment(Qt::AlignCenter);
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #7f8c8d;");
 
+    sdLabel = new QLabel(this);
+    sdLabel->setAlignment(Qt::AlignCenter);
+
     mainLayout->addLayout(ipLayout);
     mainLayout->addWidget(btnFetch);
     mainLayout->addWidget(checkStats);
     mainLayout->addWidget(distanceLabel);
+    mainLayout->addWidget(sdLabel);
     mainLayout->addWidget(progressBar);
 
     // Window
@@ -113,6 +117,35 @@ void MainWindow::readResponse() {
     distanceLabel->setText(QString(data).trimmed() + " cm");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
     progressBar->setValue(QString(data).trimmed().toInt());
+
+    while (socket->canReadLine()) {
+        QByteArray data = socket->readLine().trimmed();
+        if (data.isEmpty()) continue;
+
+        bool ok;
+        int value = data.toInt(&ok);
+        
+        if (ok) {
+            updateUI(value);
+        }
+    }
+}
+
+void MainWindow::updateUI(int value) {
+    progressBar->setValue(value);
+
+    if (checkStats->isChecked()) {
+        buffer->add(static_cast<uint16_t>(value));
+        
+        distanceLabel->setText(QString("Mean: %1 cm").arg(buffer->getMean(), 0, 'f', 1));
+        sdLabel->setText(QString("SD: %1").arg(buffer->getStandardDeviation(), 0, 'f', 2));
+        
+        distanceLabel->setStyleSheet("font-size: 30px; font-weight: bold; color: #575757;");
+    } else {
+        distanceLabel->setText(QString::number(value) + " cm");
+        sdLabel->clear();
+        distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
+    }
 }
 
 void MainWindow::onError(QAbstractSocket::SocketError socketError) {

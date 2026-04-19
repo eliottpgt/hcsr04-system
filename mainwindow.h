@@ -12,6 +12,11 @@
 #include <QTimer>
 #include <QProgressBar>
 #include <QCheckBox>
+#include <QtCore/qstring.h>
+#include <string>
+#include <memory>
+
+#include "CircularBuffer.h"
 
 class MainWindow : public QMainWindow
 {
@@ -35,8 +40,11 @@ private:
     QPushButton *btnConnect;
     QPushButton *btnFetch;
     QLabel *distanceLabel;
+    QLabel *sdLabel;
     QTcpSocket *socket;
     QTimer *timer;
     QProgressBar *progressBar;
     QCheckBox *checkStats;
+    std::unique_ptr<CircularBuffer<20>> buffer;
+    void updateUI(int value);
 };
