@@ -7,6 +7,12 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *centralWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
 
+    // IP Address Input Row
+    QHBoxLayout *ipLayout = new QHBoxLayout();
+    ipLayout->addWidget(new QLabel("STM32 IP:"));
+
+    // Display
+    mainLayout->addLayout(ipLayout);
 
     // Window
     setCentralWidget(centralWidget);
