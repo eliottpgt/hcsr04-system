@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
 
     // Init buffer
-    buffer = std::make_unique<CircularBuffer<20>>();
+    buffer = std::make_unique<CircularBuffer<80>>();
 
     // Signals Connections
     connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::requestValue);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readResponse);
     connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::onError);
+    connect(checkStats, &QCheckBox::toggle, this, &MainWindow::onCheckStats);
 }
 
 void MainWindow::toggleConnection(){
@@ -143,6 +144,10 @@ void MainWindow::updateUI(int value) {
         sdLabel->clear();
         distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
     }
+}
+
+void MainWindow::onCheckStats(){
+    buffer->reset();
 }
 
 void MainWindow::onError(QAbstractSocket::SocketError socketError) {
