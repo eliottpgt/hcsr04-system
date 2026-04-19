@@ -15,8 +15,13 @@ MainWindow::MainWindow(QWidget *parent)
     ipLayout->addWidget(ipInput);
     ipLayout->addWidget(btnConnect);
 
+    // Control Button
+    btnFetch = new QPushButton("Start Measure", this);
+    btnFetch->setEnabled(false); // Disabled until connected
+
     // Display
     mainLayout->addLayout(ipLayout);
+    mainLayout->addWidget(btnFetch);
 
     // Window
     setCentralWidget(centralWidget);
