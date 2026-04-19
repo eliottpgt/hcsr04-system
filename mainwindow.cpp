@@ -53,6 +53,9 @@ MainWindow::MainWindow(QWidget *parent)
     socket = new QTcpSocket(this);
     timer = new QTimer(this);
 
+    // Init buffer
+    buffer = std::make_unique<CircularBuffer<20>>();
+
     // Signals Connections
     connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
