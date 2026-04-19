@@ -19,4 +19,5 @@ public:
 private:
     QLineEdit *ipInput;
     QPushButton *btnConnect;
+    QPushButton *btnFetch;
 };
