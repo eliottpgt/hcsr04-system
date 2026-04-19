@@ -116,21 +116,15 @@ void MainWindow::requestValue() {
 }
 
 void MainWindow::readResponse() {
-    QByteArray data = socket->readAll();
-    distanceLabel->setText(QString(data).trimmed() + " cm");
-    distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
-    progressBar->setValue(QString(data).trimmed().toInt());
+    QByteArray data = socket->readLine().trimmed();
+    qDebug() << "Données reçues non valides :" << data;
+    if (data.isEmpty()) return;
 
-    while (socket->canReadLine()) {
-        QByteArray data = socket->readLine().trimmed();
-        if (data.isEmpty()) continue;
-
-        bool ok;
-        int value = data.toInt(&ok);
-        
-        if (ok) {
-            updateUI(value);
-        }
+    bool ok;
+    int value = data.toInt(&ok);
+    
+    if (ok) {
+        updateUI(value);
     }
 }
 
