@@ -20,8 +20,13 @@ MainWindow::MainWindow(QWidget *parent)
     btnFetch->setEnabled(false); // Disabled until connected
 
     // Display
+    distanceLabel = new QLabel("Disconnected", this);
+    distanceLabel->setAlignment(Qt::AlignCenter);
+    distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #7f8c8d;");
+
     mainLayout->addLayout(ipLayout);
     mainLayout->addWidget(btnFetch);
+    mainLayout->addWidget(distanceLabel);
 
     // Window
     setCentralWidget(centralWidget);

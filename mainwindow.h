@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -20,4 +21,5 @@ private:
     QLineEdit *ipInput;
     QPushButton *btnConnect;
     QPushButton *btnFetch;
+    QLabel *distanceLabel;
 };
