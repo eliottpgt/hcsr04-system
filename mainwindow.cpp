@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::onDisconnected);
+    connect(btnFetch, &QPushButton::clicked, this, &MainWindow::togglePolling);
 }
 
 void MainWindow::toggleConnection(){
@@ -70,6 +71,16 @@ void MainWindow::onDisconnected() {
     btnFetch->setText("Start Measure");
     distanceLabel->setText("Disconnected");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #7f8c8d;");
+}
+
+void MainWindow::togglePolling() {
+    if (timer->isActive()) {
+        timer->stop();
+        btnFetch->setText("Start Measure");
+    } else {
+        timer->start(50);
+        btnFetch->setText("Stop Measure");
+    }
 }
 
 MainWindow::~MainWindow()

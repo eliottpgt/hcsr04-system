@@ -23,6 +23,7 @@ private slots:
     void toggleConnection();
     void onConnected();
     void onDisconnected();
+    void togglePolling();
 
 private:
     QLineEdit *ipInput;
