@@ -25,6 +25,7 @@ private slots:
     void onDisconnected();
     void togglePolling();
     void requestValue();
+    void readResponse();
 
 private:
     QLineEdit *ipInput;
