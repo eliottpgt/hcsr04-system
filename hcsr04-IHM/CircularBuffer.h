@@ -12,6 +12,7 @@ private:
     size_t writeIndex = 0;
     size_t currentSize = 0;
     uint32_t runningSum = 0;
+    double runningSumSq = 0;
 
 public:
     CircularBuffer() = default;
@@ -22,7 +23,8 @@ public:
     inline bool isEmpty() const { return currentSize == 0; }
     inline bool isFull() const { return currentSize == BUFFER_SIZE; }
 
-    float getMean();
+    float getMean() const;
+    float getStandardDeviation() const;
 };
 
 #endif
