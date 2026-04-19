@@ -70,9 +70,21 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::toggleConnection(){
     if (socket->state() == QAbstractSocket::UnconnectedState) {
         QString ip = ipInput->text().trimmed();
+
+        // Try connexion
         socket->connectToHost(ip, 8080);
+
         btnConnect->setText("Connecting...");
         btnConnect->setEnabled(false);
+
+        // Timeout
+        QTimer::singleShot(5000, this, [this]() {
+            if (socket->state() == QAbstractSocket::ConnectingState) {
+                socket->abort();
+                onError(QAbstractSocket::SocketTimeoutError); 
+            }
+        });
+
     } else {
         socket->disconnectFromHost();
     }
@@ -118,7 +130,7 @@ void MainWindow::requestValue() {
 
 void MainWindow::readResponse() {
     QByteArray data = socket->readLine().trimmed();
-    qDebug() << "Données reçues non valides :" << data;
+    qDebug() << "Data received :" << data;
     if (data.isEmpty()) return;
 
     bool ok;
@@ -154,14 +166,21 @@ void MainWindow::onCheckStats(bool checked){
 }
 
 void MainWindow::onError(QAbstractSocket::SocketError socketError) {
-    QString errorMsg = socket->errorString();
-    distanceLabel->setText("Error: " + errorMsg);
+    QString errorMsg;
+    
+    if (socketError == QAbstractSocket::SocketTimeoutError || socket->errorString().contains("canceled")) {
+        errorMsg = "Timeout: Server not found";
+    } else {
+        errorMsg = socket->errorString();
+    }
 
+    distanceLabel->setText(errorMsg);
     qDebug() << "Socket Error:" << errorMsg;
 
     btnConnect->setText("Connect");
     btnConnect->setEnabled(true);
-    distanceLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #e74c3c;");
+    btnFetch->setEnabled(false);
+    distanceLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #e74c3c;");
 }
 
 MainWindow::~MainWindow()
