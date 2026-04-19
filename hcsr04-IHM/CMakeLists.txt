@@ -13,6 +13,8 @@ qt_add_executable(hcsr04_IHM
     main.cpp
     mainwindow.cpp
     mainwindow.h
+    CircularBuffer.cpp
+    CircularBuffer.h
 )
 
 target_link_libraries(hcsr04_IHM PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
