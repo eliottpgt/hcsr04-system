@@ -13,7 +13,6 @@ qt_add_executable(hcsr04_IHM
     main.cpp
     mainwindow.cpp
     mainwindow.h
-    CircularBuffer.cpp
     CircularBuffer.h
 )
 
