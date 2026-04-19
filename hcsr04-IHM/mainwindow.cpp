@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Signals Connections
     connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
+    connect(socket, &QTcpSocket::disconnected, this, &MainWindow::onDisconnected);
 }
 
 void MainWindow::toggleConnection(){
@@ -59,6 +60,16 @@ void MainWindow::onConnected() {
     btnFetch->setEnabled(true);
     distanceLabel->setText("Connected");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2980b9;");
+}
+
+void MainWindow::onDisconnected() {
+    timer->stop();
+    btnConnect->setText("Connect");
+    btnConnect->setEnabled(true);
+    btnFetch->setEnabled(false);
+    btnFetch->setText("Start Measure");
+    distanceLabel->setText("Disconnected");
+    distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #7f8c8d;");
 }
 
 MainWindow::~MainWindow()
