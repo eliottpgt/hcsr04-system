@@ -34,6 +34,7 @@ private slots:
     void requestValue();
     void readResponse();
     void onError(QAbstractSocket::SocketError socketError);
+    void onCheckStats();
 
 private:
     QLineEdit *ipInput;
@@ -45,6 +46,6 @@ private:
     QTimer *timer;
     QProgressBar *progressBar;
     QCheckBox *checkStats;
-    std::unique_ptr<CircularBuffer<20>> buffer;
+    std::unique_ptr<CircularBuffer<80>> buffer;
     void updateUI(int value);
 };
