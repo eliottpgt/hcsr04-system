@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::onDisconnected);
     connect(btnFetch, &QPushButton::clicked, this, &MainWindow::togglePolling);
     connect(timer, &QTimer::timeout, this, &MainWindow::requestValue);
+    connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readResponse);
 }
 
 void MainWindow::toggleConnection(){
@@ -88,6 +89,12 @@ void MainWindow::requestValue() {
     if (socket->state() == QAbstractSocket::ConnectedState) {
         socket->write("GET_VALUE\n");
     }
+}
+
+void MainWindow::readResponse() {
+    QByteArray data = socket->readAll();
+    distanceLabel->setText(QString(data).trimmed() + " cm");
+    distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
 }
 
 MainWindow::~MainWindow()
