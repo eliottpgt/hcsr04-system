@@ -10,7 +10,10 @@ MainWindow::MainWindow(QWidget *parent)
     // IP Address Input Row
     QHBoxLayout *ipLayout = new QHBoxLayout();
     ipInput = new QLineEdit("192.168.2.XX", this);
+    btnConnect = new QPushButton("Connect", this);
     ipLayout->addWidget(new QLabel("STM32 IP:"));
+    ipLayout->addWidget(ipInput);
+    ipLayout->addWidget(btnConnect);
 
     // Display
     mainLayout->addLayout(ipLayout);

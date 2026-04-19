@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 
 class MainWindow : public QMainWindow
 {
@@ -17,4 +18,5 @@ public:
 
 private:
     QLineEdit *ipInput;
+    QPushButton *btnConnect;
 };
