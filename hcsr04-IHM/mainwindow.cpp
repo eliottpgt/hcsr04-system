@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Signals Connections
     connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
+    connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
 }
 
 void MainWindow::toggleConnection(){
@@ -50,6 +51,14 @@ void MainWindow::toggleConnection(){
     } else {
         socket->disconnectFromHost();
     }
+}
+
+void MainWindow::onConnected() {
+    btnConnect->setText("Disconnect");
+    btnConnect->setEnabled(true);
+    btnFetch->setEnabled(true);
+    distanceLabel->setText("Connected");
+    distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2980b9;");
 }
 
 MainWindow::~MainWindow()
