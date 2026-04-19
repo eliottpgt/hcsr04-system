@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Progress Bar
     progressBar = new QProgressBar(this);
-    progressBar->setRange(1, 80);
+    progressBar->setRange(1, 150);
 
     // Display
     distanceLabel = new QLabel("Disconnected", this);
