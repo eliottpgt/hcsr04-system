@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QTcpSocket>
 #include <QTimer>
+#include <QProgressBar>
 
 class MainWindow : public QMainWindow
 {
@@ -35,4 +36,5 @@ private:
     QLabel *distanceLabel;
     QTcpSocket *socket;
     QTimer *timer;
+    QProgressBar *progressBar;
 };

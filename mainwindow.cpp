@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     btnFetch = new QPushButton("Start Measure", this);
     btnFetch->setEnabled(false); // Disabled until connected
 
+    // Progress Bar
+    progressBar = new QProgressBar(this);
+    progressBar->setRange(1, 80);
+
     // Display
     distanceLabel = new QLabel("Disconnected", this);
     distanceLabel->setAlignment(Qt::AlignCenter);
@@ -27,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addLayout(ipLayout);
     mainLayout->addWidget(btnFetch);
     mainLayout->addWidget(distanceLabel);
+    mainLayout->addWidget(progressBar);
 
     // Window
     setCentralWidget(centralWidget);
@@ -96,6 +101,7 @@ void MainWindow::readResponse() {
     QByteArray data = socket->readAll();
     distanceLabel->setText(QString(data).trimmed() + " cm");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
+    progressBar->setValue(QString(data).trimmed().toInt());
 }
 
 void MainWindow::onError(QAbstractSocket::SocketError socketError) {
