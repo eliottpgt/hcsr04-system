@@ -19,6 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void toggleConnection();
+
 private:
     QLineEdit *ipInput;
     QPushButton *btnConnect;

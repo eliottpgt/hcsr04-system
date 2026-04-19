@@ -36,6 +36,20 @@ MainWindow::MainWindow(QWidget *parent)
     // --- NETWORK & TIMER SETUP ---
     socket = new QTcpSocket(this);
     timer = new QTimer(this);
+
+    // Signals Connections
+    connect(btnConnect, &QPushButton::clicked, this, &MainWindow::toggleConnection);
+}
+
+void MainWindow::toggleConnection(){
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
+        QString ip = ipInput->text().trimmed();
+        socket->connectToHost(ip, 8080);
+        btnConnect->setText("Connecting...");
+        btnConnect->setEnabled(false);
+    } else {
+        socket->disconnectFromHost();
+    }
 }
 
 MainWindow::~MainWindow()
