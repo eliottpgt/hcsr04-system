@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::connected, this, &MainWindow::onConnected);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::onDisconnected);
     connect(btnFetch, &QPushButton::clicked, this, &MainWindow::togglePolling);
+    connect(timer, &QTimer::timeout, this, &MainWindow::requestValue);
 }
 
 void MainWindow::toggleConnection(){
@@ -80,6 +81,12 @@ void MainWindow::togglePolling() {
     } else {
         timer->start(50);
         btnFetch->setText("Stop Measure");
+    }
+}
+
+void MainWindow::requestValue() {
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->write("GET_VALUE\n");
     }
 }
 
