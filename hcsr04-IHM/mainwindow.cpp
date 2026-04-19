@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(centralWidget);
     setWindowTitle("STM32MP1 Sensor Monitor");
     resize(400, 250);
+
+    // --- NETWORK & TIMER SETUP ---
+    socket = new QTcpSocket(this);
+    timer = new QTimer(this);
 }
 
 MainWindow::~MainWindow()

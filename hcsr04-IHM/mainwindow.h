@@ -8,6 +8,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QLabel>
+#include <QTcpSocket>
+#include <QTimer>
 
 class MainWindow : public QMainWindow
 {
@@ -22,4 +24,6 @@ private:
     QPushButton *btnConnect;
     QPushButton *btnFetch;
     QLabel *distanceLabel;
+    QTcpSocket *socket;
+    QTimer *timer;
 };
