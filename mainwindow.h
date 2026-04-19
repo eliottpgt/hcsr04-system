@@ -26,6 +26,7 @@ private slots:
     void togglePolling();
     void requestValue();
     void readResponse();
+    void onError(QAbstractSocket::SocketError socketError);
 
 private:
     QLineEdit *ipInput;

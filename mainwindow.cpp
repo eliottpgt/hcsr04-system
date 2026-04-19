@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(btnFetch, &QPushButton::clicked, this, &MainWindow::togglePolling);
     connect(timer, &QTimer::timeout, this, &MainWindow::requestValue);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readResponse);
+    connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::onError);
 }
 
 void MainWindow::toggleConnection(){
@@ -95,6 +96,17 @@ void MainWindow::readResponse() {
     QByteArray data = socket->readAll();
     distanceLabel->setText(QString(data).trimmed() + " cm");
     distanceLabel->setStyleSheet("font-size: 35px; font-weight: bold; color: #2ecc71;");
+}
+
+void MainWindow::onError(QAbstractSocket::SocketError socketError) {
+    QString errorMsg = socket->errorString();
+    distanceLabel->setText("Error: " + errorMsg);
+
+    qDebug() << "Socket Error:" << errorMsg;
+
+    btnConnect->setText("Connect");
+    btnConnect->setEnabled(true);
+    distanceLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #e74c3c;");
 }
 
 MainWindow::~MainWindow()
