@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::requestValue);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readResponse);
     connect(socket, &QTcpSocket::errorOccurred, this, &MainWindow::onError);
-    connect(checkStats, &QCheckBox::toggle, this, &MainWindow::onCheckStats);
+    connect(checkStats, &QCheckBox::toggled, this, &MainWindow::onCheckStats);
 }
 
 void MainWindow::toggleConnection(){
@@ -146,8 +146,11 @@ void MainWindow::updateUI(int value) {
     }
 }
 
-void MainWindow::onCheckStats(){
-    buffer->reset();
+void MainWindow::onCheckStats(bool checked){
+    if (checked) {
+        buffer->reset();
+        sdLabel->clear();
+    }
 }
 
 void MainWindow::onError(QAbstractSocket::SocketError socketError) {

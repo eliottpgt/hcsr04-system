@@ -34,7 +34,7 @@ private slots:
     void requestValue();
     void readResponse();
     void onError(QAbstractSocket::SocketError socketError);
-    void onCheckStats();
+    void onCheckStats(bool checked);
 
 private:
     QLineEdit *ipInput;
