@@ -1,0 +1,9 @@
+config BR2_PACKAGE_HCSR04_SERVER
+    bool "hcsr04-server"
+    depends on BR2_PACKAGE_HCSR04_DRIVER
+    depends on BR2_INIT_SYSTEMD
+    help
+      User-space TCP/IP server for the hcsr04 ultrasonic sensor.
+      
+      This application reads distance data from the kernel driver
+      (/dev/hcsr04) and serves it over the network.
