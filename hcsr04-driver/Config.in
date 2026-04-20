@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_HCSR04_DRIVER/package/hcsr04-server/Config.in"
