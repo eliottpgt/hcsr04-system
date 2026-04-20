@@ -1,0 +1,9 @@
+HCSR04_DRIVER_VERSION = 1.0
+HCSR04_DRIVER_SITE = $(BR2_EXTERNAL_HCSR04_DRIVER)/package/hcsr04-driver/src
+HCSR04_DRIVER_SITE_METHOD = local
+
+HCSR04_DRIVER_LICENSE = GPL-2.0
+HCSR04_DRIVER_LICENSE_FILES = COPYING
+
+$(eval $(kernel-module))
+$(eval $(generic-package))
