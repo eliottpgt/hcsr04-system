@@ -1,0 +1,5 @@
+config BR2_PACKAGE_HCSR04_DRIVER
+    bool "hcsr04-driver"
+    depends on BR2_LINUX_KERNEL
+    help
+      Driver kernel module for the HC-SR04 ultrasonic range sensor.
