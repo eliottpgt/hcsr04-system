@@ -1,0 +1,10 @@
+[Unit]
+Description=HCSR04 TCP Server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/hcsr04_server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
