@@ -1,2 +1,2 @@
-source "$BR2_EXTERNAL_HCSR04_DRIVER/package/hcsr04-driver/Config.in"
-source "$BR2_EXTERNAL_HCSR04_DRIVER/package/hcsr04-server/Config.in"
+source "$BR2_EXTERNAL_HCSR04_DRIVER_PATH/package/hcsr04-driver/Config.in"
+source "$BR2_EXTERNAL_HCSR04_DRIVER_PATH/package/hcsr04-server/Config.in"
