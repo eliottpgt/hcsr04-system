@@ -6,7 +6,7 @@
 #include <fcntl.h>
 
 #define PORT 8080
-#define SENSOR_PATH "/dev/hcsr04-driver"
+#define SENSOR_PATH "/dev/hcsr04"
 #define BUFFER_SIZE 128
 
 int main() {
