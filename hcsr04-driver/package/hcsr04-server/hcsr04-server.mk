@@ -1,5 +1,5 @@
 HCSR04_SERVER_VERSION = 1.0
-HCSR04_SERVER_SITE = $(BR2_EXTERNAL_HCSR04_DRIVER)/package/hcsr04-server/src
+HCSR04_SERVER_SITE = $(BR2_EXTERNAL_HCSR04_DRIVER_PATH)/package/hcsr04-server/src
 HCSR04_SERVER_SITE_METHOD = local
 
 # Build step: Execute the compilation process
@@ -25,7 +25,7 @@ endef
 # /usr/lib/systemd/system/: The standard location where systemd looks for available unit files
 # Buildroot will automatically enable this service by creating the necessary symlinks
 define HCSR04_SERVER_INSTALL_INIT_SYSTEMD
-	$(INSTALL) -D -m 644 $(BR2_EXTERNAL_HCSR04_DRIVER)/package/hcsr04-server/hcsr04-server.service \
+	$(INSTALL) -D -m 644 $(BR2_EXTERNAL_HCSR04_DRIVER_PATH)/package/hcsr04-server/hcsr04-server.service \
 		$(TARGET_DIR)/usr/lib/systemd/system/hcsr04-server.service
 endef
 
